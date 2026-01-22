@@ -1,6 +1,6 @@
 ---
-name: CREEM API Integration
-description: Integrate CREEM payment infrastructure for checkouts, subscriptions, licenses, and webhooks. Supports one-time payments, recurring billing, and MoR compliance.
+name: creem
+description: Integrate Creem payment infrastructure for checkouts, subscriptions, licenses, and webhooks. Supports one-time payments, recurring billing, and MoR compliance.
 ---
 
 # CREEM API Integration Skill
