@@ -1,174 +1,57 @@
 # CREEM Skills for AI Coding Assistants
 
+> [!IMPORTANT]
+> **This repository is a pointer.** The Creem skill is now maintained in
+> **[armitage-labs/creem](https://github.com/armitage-labs/creem)** at
+> [`packages/docs/skills/creem-api`](https://github.com/armitage-labs/creem/tree/main/packages/docs/skills/creem-api),
+> alongside the SDKs and the API docs, so it can never drift from the platform again.
+>
+> This repo now contains only a marketplace manifest that resolves to that folder.
+> **Nothing here needs editing** — open skill changes against `armitage-labs/creem`.
+
 Official Creem payment integration skills for AI coding assistants like Claude Code, Cursor, and Windsurf.
 
-## Quick Install for Claude Code
+## Install (Claude Code)
 
-Install the Creem skill with two simple commands:
+Nothing changes if you already installed from here — run `/plugin marketplace update creem-skills` and you will pick up the maintained skill automatically.
+
+New installs should use the canonical source:
 
 ```bash
-/plugin marketplace add armitage-labs/creem-skills
+/plugin marketplace add armitage-labs/creem
 /plugin install creem-api@creem-skills
 ```
 
-That's it! Claude Code now has complete knowledge of the Creem API.
+The older `/plugin marketplace add armitage-labs/creem-skills` still works and resolves to the same files.
 
-## What is a Skill?
+## Install (Cursor, Windsurf, and other tools)
 
-Skills are structured instructions and reference materials that AI assistants use to provide more accurate, contextual help for specific tasks. When you load a skill, the AI assistant gains deep knowledge about the domain and can guide you through implementations with best practices.
-
-## Available Skills
-
-### creem-api
-
-A comprehensive skill for integrating the CREEM REST API. Covers:
-
-- **Checkouts** - Create payment sessions for one-time and recurring purchases
-- **Subscriptions** - Manage recurring billing, upgrades, cancellations
-- **Webhooks** - Handle real-time payment events securely
-- **Licenses** - Implement license key systems for desktop/mobile apps
-- **Customers** - Manage customer data and self-service portals
-- **Discounts** - Create and manage promotional codes
-- **Transactions** - Query payment history and details
-
-**Contents:**
-- `Skill.md` - Main skill file with quick reference and implementation patterns
-- `REFERENCE.md` - Complete API reference with all endpoints and schemas
-- `WEBHOOKS.md` - Webhook events documentation with payload examples
-- `WORKFLOWS.md` - Step-by-step integration guides for common use cases
-
-## Installation Methods
-
-### Claude Code (Recommended)
-
-**Option 1: Plugin Marketplace (Easiest)**
+Pull just the skill folder into your project:
 
 ```bash
-# Add the marketplace
-/plugin marketplace add armitage-labs/creem-skills
-
-# Install the skill
-/plugin install creem-api@creem-skills
+npx degit armitage-labs/creem/packages/docs/skills/creem-api .cursor/skills/creem-api
 ```
 
-**Managing the plugin:**
-
-```bash
-# View installed plugins
-/plugin
-
-# Disable temporarily
-/plugin disable creem-api@creem-skills
-
-# Enable again
-/plugin enable creem-api@creem-skills
-
-# Uninstall
-/plugin uninstall creem-api@creem-skills
-
-# Update to latest version
-/plugin marketplace update creem-skills
-```
-
-**Option 2: Direct Reference**
-
-Reference the skill in any conversation:
+Then reference it in conversation:
 
 ```
-Help me integrate Creem payments. Use the skill at https://github.com/armitage-labs/creem-skills
+@.cursor/skills/creem-api/SKILL.md Help me create a checkout flow
 ```
 
-### Cursor
+## What's in the skill
 
-1. Clone the skill repository into your project:
-   ```bash
-   git clone https://github.com/armitage-labs/creem-skills.git .cursor/skills
-   ```
+| File           | Description                                                 |
+| -------------- | ----------------------------------------------------------- |
+| `SKILL.md`     | Core skill with quick reference and implementation patterns |
+| `REFERENCE.md` | Complete API reference with all endpoints and schemas       |
+| `WEBHOOKS.md`  | Webhook events documentation with payload examples          |
+| `WORKFLOWS.md` | Step-by-step integration guides for common use cases        |
 
-2. Reference the skill files in your conversations using `@` mentions:
-   ```
-   @.cursor/skills/creem-api/Skill.md Help me create a checkout flow
-   ```
+## Documentation
 
-### Windsurf
+- Skill setup guide: https://docs.creem.io/code/sdks/ai-agents
+- API documentation: https://docs.creem.io
 
-1. Clone the skill repository:
-   ```bash
-   git clone https://github.com/armitage-labs/creem-skills.git .windsurf/creem
-   ```
+## License
 
-2. Add to your project's knowledge base in Windsurf settings
-
-### Other AI Tools
-
-Most AI coding assistants support adding custom context. You can:
-
-1. Clone this repository into your project
-2. Add the files to your AI tool's context or knowledge base
-3. Reference the OpenAPI specification (`api-reference/openapi.json`) for structured API information
-
-## Skill Structure
-
-```
-skills/
-├── .claude-plugin/
-│   └── marketplace.json    # Plugin marketplace configuration
-├── creem-api/
-│   ├── plugin.json         # Plugin metadata
-│   ├── Skill.md            # Core skill instructions
-│   ├── REFERENCE.md        # Detailed API reference
-│   ├── WEBHOOKS.md         # Webhook documentation
-│   └── WORKFLOWS.md        # Integration patterns
-└── README.md               # This file
-```
-
-## What This Skill Covers
-
-### API Endpoints
-- Products: Create, retrieve, list products
-- Checkouts: Create and retrieve checkout sessions
-- Customers: Manage customers and portal links
-- Subscriptions: Full lifecycle management
-- Licenses: Activation, validation, deactivation
-- Discounts: Create and manage promotional codes
-- Transactions: Query payment history
-
-### Integration Patterns
-- Basic SaaS subscription flows
-- One-time purchases with digital delivery
-- License key systems for desktop apps
-- Seat-based team billing
-- Freemium with upgrade flows
-- Affiliate/referral tracking
-
-### Best Practices
-- Webhook signature verification
-- Error handling patterns
-- Test mode development
-- Security considerations
-- Idempotency and retry handling
-
-## What This Skill Does NOT Cover
-
-This skill focuses on the CREEM REST API. It does not cover:
-
-- **TypeScript SDK** (`creem_io`) - See [TypeScript SDK docs](https://docs.creem.io/code/sdks/typescript)
-- **Next.js SDK** (`@creem_io/nextjs`) - See [Next.js SDK docs](https://docs.creem.io/code/sdks/nextjs)
-- **Better Auth Plugin** (`@creem_io/better-auth`) - See [Better Auth docs](https://docs.creem.io/code/sdks/better-auth)
-
-For SDK-specific help, refer to the SDK documentation.
-
-## Contributing
-
-To improve this skill:
-
-1. Test the integration patterns in real projects
-2. Identify common pain points or missing information
-3. Submit a pull request with improvements
-4. Keep examples current with API changes
-
-## Support
-
-- **Documentation**: https://docs.creem.io
-- **Dashboard**: https://creem.io/dashboard
-- **Support**: support@creem.io
+MIT
